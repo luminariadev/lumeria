@@ -12,38 +12,58 @@ const easeOutBounce = (x) => {
 };
 
 /**
- * Builds vibrant, baked-golden Nastar mesh with dark clove crown on top.
- * Single unified geometry = 1 clean, high-performance draw call.
+ * Builds authentic, appetizing Indonesian Nastar mesh:
+ * - Plump, squat baked pastry bun with flat bottom
+ * - Rich buttery golden pastry & egg-wash amber glaze (clean, no halo spots)
+ * - Gentle artisan dimple where clove is tucked in
+ * - Authentic 4-pointed star dried clove spice (bunga cengkeh: bud + 4 flared sepals + stem)
+ * Single unified geometry with vertex colors = 1 clean, high-performance draw call.
  */
 function createDedicatedJarNastarGeo() {
-  const sphereGeo = new THREE.SphereGeometry(1, 28, 20);
+  // 1. Pastry Bun Geometry
+  const sphereGeo = new THREE.SphereGeometry(1, 32, 22);
   const pos = sphereGeo.attributes.position;
   const colors = new Float32Array(pos.count * 3);
 
-  const pale = new THREE.Color("#FFDB9E");
-  const glaze = new THREE.Color("#EE8916");
-  const darkGlaze = new THREE.Color("#BA5200");
-  const cloveCol = new THREE.Color("#260E04");
+  // Warm bakery palette: rich golden butter base and glowing egg-wash glaze
+  const baseCrust = new THREE.Color("#F5C368");
+  const eggGlaze = new THREE.Color("#E28216");
+  const bakedGlow = new THREE.Color("#BA5308");
+  const cloveCol = new THREE.Color("#2A1207");
   const tmp = new THREE.Color();
 
   for (let i = 0; i < pos.count; i++) {
-    let y = pos.getY(i);
     let x = pos.getX(i);
+    let y = pos.getY(i);
     let z = pos.getZ(i);
 
-    // Gently flatten bottom
-    if (y < -0.45) y = -0.45 + (y + 0.45) * 0.22;
-    y *= 0.88;
+    // Flatten bottom where it rests on baking tray
+    if (y < -0.42) {
+      y = -0.42 + (y + 0.42) * 0.16;
+    }
+
+    // Squat pastry bun ratio (nastar is plump and squat, not a tall dome)
+    y *= 0.76;
+
+    // Plump waist around the middle
+    const rXZ = Math.hypot(x, z);
+    const plump = 1.0 + 0.08 * Math.cos(Math.max(-1, Math.min(1, y / 0.76)) * Math.PI * 0.5);
+    x *= plump;
+    z *= plump;
+
+    // Subtle artisan dimple in the center of the crown where the clove is pressed
+    if (y > 0.45 && rXZ < 0.32) {
+      const indent = 1 - rXZ / 0.32;
+      y -= indent * indent * 0.1;
+    }
+
     pos.setXYZ(i, x, y, z);
 
-    // Color gradient: warm crust, egg yolk glaze on top
-    const t = Math.max(0, Math.min(1, (y + 0.35) / 1.15));
-    tmp.copy(pale).lerp(glaze, t);
-    if (t > 0.7) tmp.lerp(darkGlaze, (t - 0.7) * 3);
-
-    // Clove spot at the very top
-    if (y > 0.7 && Math.hypot(x, z) < 0.28) {
-      tmp.copy(cloveCol);
+    // Smooth baked egg-wash gradient across the bun (pure pastry, NO circular dark halo)
+    const t = Math.max(0, Math.min(1, (y + 0.38) / 1.0));
+    tmp.copy(baseCrust).lerp(eggGlaze, t);
+    if (t > 0.72) {
+      tmp.lerp(bakedGlow, (t - 0.72) * 1.8);
     }
 
     colors[i * 3] = tmp.r;
@@ -53,21 +73,51 @@ function createDedicatedJarNastarGeo() {
   sphereGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
   sphereGeo.computeVertexNormals();
 
-  // Clove crown (stem + 4 small sepals)
-  const cloveCyl = new THREE.CylinderGeometry(0.045, 0.07, 0.25, 6);
-  cloveCyl.translate(0, 0.84, 0);
-  const cloveColors = new Float32Array(cloveCyl.attributes.position.count * 3);
-  for (let i = 0; i < cloveCyl.attributes.position.count; i++) {
+  // 2. Botanical 4-pointed Star Dried Clove Spice (Bunga Cengkeh)
+  // Components: stem, central spherical bud, and 4 flared triangular sepals forming a star
+  const cloveParts = [];
+
+  // Central round spice bud
+  const bud = new THREE.SphereGeometry(0.085, 10, 8);
+  bud.translate(0, 0.74, 0);
+  cloveParts.push(bud);
+
+  // Clove stem tucked into the dimple
+  const stem = new THREE.CylinderGeometry(0.032, 0.048, 0.22, 7);
+  stem.translate(0, 0.63, 0);
+  cloveParts.push(stem);
+
+  // 4 flared calyx sepals (bunga cengkeh star pattern: ★)
+  for (let k = 0; k < 4; k++) {
+    const sepal = new THREE.ConeGeometry(0.04, 0.16, 5);
+    sepal.translate(0, 0.07, 0);
+    // Flare outward horizontally over the pastry surface
+    sepal.rotateZ(1.22); // ~70 degrees from vertical, spreading flat
+    sepal.rotateY((k * Math.PI) / 2 + 0.35); // cardinal star cross
+    sepal.translate(0, 0.70, 0);
+    cloveParts.push(sepal);
+  }
+
+  // Merge clove parts and apply clove vertex colors
+  const cloveGeo = mergeGeometries(
+    cloveParts.map((p) => {
+      p.deleteAttribute("uv");
+      return p;
+    })
+  );
+
+  const cloveColors = new Float32Array(cloveGeo.attributes.position.count * 3);
+  for (let i = 0; i < cloveGeo.attributes.position.count; i++) {
     cloveColors[i * 3] = cloveCol.r;
     cloveColors[i * 3 + 1] = cloveCol.g;
     cloveColors[i * 3 + 2] = cloveCol.b;
   }
-  cloveCyl.setAttribute("color", new THREE.BufferAttribute(cloveColors, 3));
+  cloveGeo.setAttribute("color", new THREE.BufferAttribute(cloveColors, 3));
+  cloveGeo.computeVertexNormals();
 
   sphereGeo.deleteAttribute("uv");
-  cloveCyl.deleteAttribute("uv");
 
-  return mergeGeometries([sphereGeo, cloveCyl]);
+  return mergeGeometries([sphereGeo, cloveGeo]);
 }
 
 /** Scroll-driven: nastar balls drop one by one into a glass toples, then the red lid closes. */

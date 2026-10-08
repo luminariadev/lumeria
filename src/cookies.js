@@ -68,39 +68,44 @@ function sculpt(geo, fn) {
 let nastarCache;
 export function nastarParts() {
   if (nastarCache) return nastarCache;
-  const pale = C("#F3D79C"), glaze = C("#D9852A"), deep = C("#B8621B");
+  const pale = C("#F5C468"), glaze = C("#E28216"), deep = C("#BA5308");
   const geo = sculpt(prepSphere(72, 54), (v) => {
     let y = v.y;
-    if (y < -0.55) y = -0.55 + (y + 0.55) * 0.22;
-    v.y = y * 0.86;
+    if (y < -0.5) y = -0.5 + (y + 0.5) * 0.18;
+    v.y = y * 0.78;
+    const rXZ = Math.hypot(v.x, v.z);
+    if (v.y > 0.45 && rXZ < 0.32) {
+      const indent = 1 - rXZ / 0.32;
+      v.y -= indent * indent * 0.08;
+    }
     const n = fbm(v.x * 3 + 3, v.y * 3, v.z * 3);
     const ridge = 1 - Math.abs(vnoise(v.x * 4.5 + 9, v.y * 4.5, v.z * 4.5) * 2 - 1);
     const crack = Math.pow(ridge, 14) * smooth(-0.05, 0.5, v.y);
     const len = v.length();
-    v.multiplyScalar((len + (n - 0.5) * 0.07 - crack * 0.03) / len);
-    const t = smooth(-0.3, 0.7, v.y) * (0.7 + n * 0.45);
+    v.multiplyScalar((len + (n - 0.5) * 0.06 - crack * 0.02) / len);
+    const t = smooth(-0.35, 0.65, v.y) * (0.75 + n * 0.35);
     tmpC.lerpColors(pale, glaze, Math.min(1, t));
-    if (t > 0.85) tmpC.lerp(deep, (t - 0.85) * 1.6);
-    tmpC.lerp(pale, crack * 0.85);
+    if (t > 0.82) tmpC.lerp(deep, (t - 0.82) * 1.6);
+    tmpC.lerp(pale, crack * 0.7);
     return tmpC;
   });
-  const mat = new THREE.MeshPhysicalMaterial({ vertexColors: true, roughness: 0.55, clearcoat: 0.45, clearcoatRoughness: 0.35 });
+  const mat = new THREE.MeshPhysicalMaterial({ vertexColors: true, roughness: 0.5, clearcoat: 0.45, clearcoatRoughness: 0.3 });
 
-  // clove (cengkeh) merged into one geometry, sitting on top of the ball
-  const stem = new THREE.CylinderGeometry(0.03, 0.05, 0.26, 8).translate(0, 0.13, 0);
-  const bud = new THREE.SphereGeometry(0.07, 12, 10).translate(0, 0.29, 0);
+  // clove (cengkeh) merged into one geometry, sitting naturally in the crown dimple
+  const stem = new THREE.CylinderGeometry(0.03, 0.048, 0.22, 8).translate(0, 0.11, 0);
+  const bud = new THREE.SphereGeometry(0.08, 12, 10).translate(0, 0.25, 0);
   const parts = [stem, bud];
   for (let k = 0; k < 4; k++) {
-    const s = new THREE.ConeGeometry(0.038, 0.13, 6);
-    s.translate(0, 0.065, 0);
-    s.rotateZ(0.95);
+    const s = new THREE.ConeGeometry(0.038, 0.15, 6);
+    s.translate(0, 0.07, 0);
+    s.rotateZ(1.18);
     s.rotateY((k * Math.PI) / 2 + 0.4);
-    s.translate(0, 0.25, 0);
+    s.translate(0, 0.21, 0);
     parts.push(s);
   }
   const cloveGeo = mergeGeometries(parts.map((p) => (p.deleteAttribute("uv"), p)));
-  cloveGeo.translate(0, 0.74, 0);
-  const cloveMat = new THREE.MeshStandardMaterial({ color: "#3A1C0F", roughness: 0.85 });
+  cloveGeo.translate(0, 0.66, 0);
+  const cloveMat = new THREE.MeshStandardMaterial({ color: "#2A1207", roughness: 0.85 });
   nastarCache = { geo, mat, cloveGeo, cloveMat };
   return nastarCache;
 }
