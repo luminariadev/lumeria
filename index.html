@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lumeria — Kue Kering Rumahan, Lumer Sejak Gigitan Pertama</title>
+    <meta
+      name="description"
+      content="Lumeria membuat nastar, kastengel, sagu keju, putri salju, kue kacang, dan kuping gajah dengan tangan, di dapur rumah, dalam jumlah kecil. Pesan toples & hampers via WhatsApp."
+    />
+    <meta name="theme-color" content="#F6E6CC" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='56' r='38' fill='%23E9A03B' stroke='%233A1A0E' stroke-width='8'/><rect x='46' y='8' width='8' height='22' rx='4' fill='%233A1A0E'/></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ============ LOADER ============ -->
+    <div class="loader" id="loader" role="dialog" aria-modal="true" aria-label="Memuat halaman">
+      <div class="loader__curtains" aria-hidden="true">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="#3A1A0E" d="M0 0 L100 0 L100 100 Q50 100 0 100 Z" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="#E2601F" d="M0 0 L100 0 L100 100 Q50 100 0 100 Z" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="#E9A03B" d="M0 0 L100 0 L100 100 Q50 100 0 100 Z" /></svg>
+      </div>
+      <div class="loader__jar" aria-hidden="true">
+        <svg viewBox="0 0 220 260" fill="none">
+          <rect class="lj-lid" x="38" y="14" width="144" height="34" rx="10" fill="#C8372D" stroke="#3A1A0E" stroke-width="7" />
+          <g class="lj-lid" stroke="#3A1A0E" stroke-width="4" opacity=".5"><path d="M62 20v22M86 20v22M110 20v22M134 20v22M158 20v22" /></g>
+          <g class="lj-balls">
+            <circle cx="72" cy="214" r="21" /><circle cx="114" cy="216" r="21" /><circle cx="154" cy="212" r="21" />
+            <circle cx="92" cy="178" r="21" /><circle cx="134" cy="176" r="21" />
+            <circle cx="66" cy="142" r="21" /><circle cx="110" cy="138" r="21" /><circle cx="152" cy="142" r="21" />
+            <circle cx="88" cy="102" r="21" /><circle cx="132" cy="100" r="21" />
+          </g>
+          <path d="M44 56h132c10 0 16 8 16 18v150c0 16-12 28-28 28H56c-16 0-28-12-28-28V74c0-10 6-18 16-18Z" stroke="#3A1A0E" stroke-width="7" fill="rgba(255,255,255,.12)" />
+          <path d="M44 84v120" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55" />
+        </svg>
+      </div>
+      <p class="loader__status" aria-live="polite">Menimbang mentega…</p>
+      <div class="loader__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+    </div>
+
+    <div class="cursor" aria-hidden="true"><span class="cursor__label">Tambah</span></div>
+
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="nav">
+      <a href="#top" class="nav__logo" aria-label="Lumeria, ke atas">Lumeria</a>
+      <div class="nav__right">
+        <button class="pill pill--ghost sound-btn" id="soundToggle" type="button" aria-label="Toggle efek suara" title="Efek Suara">
+          <span class="sound-icon" id="soundIcon">🔊</span>
+          <span class="sound-text">Suara: ON</span>
+        </button>
+        <a href="#pesan" class="pill pill--solid" data-magnetic>
+          <span class="roll"><span>Pesan</span><span aria-hidden="true">Pesan</span></span>
+          <span class="nav__count" id="navCount" aria-label="jumlah toples di keranjang">0</span>
+        </a>
+        <div class="menu">
+          <button class="pill pill--ghost" id="menuBtn" aria-expanded="false" aria-controls="menuPanel">
+            <span class="roll"><span>Menu</span><span aria-hidden="true">Menu</span></span>
+            <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+          </button>
+          <nav class="menu__panel" id="menuPanel" aria-label="Navigasi utama">
+            <div class="menu__panel-header">
+              <span class="menu__panel-title">Menu Lumeria</span>
+              <button class="menu__panel-close" id="menuCloseBtn" type="button" aria-label="Tutup menu">✕</button>
+            </div>
+            <a href="#top">Beranda</a>
+            <a href="#cerita">Cerita</a>
+            <a href="#menu">Isi Toples</a>
+            <a href="#dapur">Dapur</a>
+            <a href="#toples">Toples 3D</a>
+            <a href="#hampers">Hampers</a>
+            <a href="#faq">Tanya Jawab</a>
+            <a href="#pesan">Pesan</a>
+            <p>Dapur Bu Rini — Depok, Jawa Barat</p>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="hero">
+        <div class="hero__pin">
+          <div class="hero__title-wrap">
+            <h1 class="hero__title stroke" data-pop>Kue Rumah</h1>
+            <p class="sticker-text sticker-text--tl stroke" data-pop>Dipanggang<br />tiap pagi</p>
+            <p class="sticker-text sticker-text--br stroke" data-pop>Resep<br />sejak 1987</p>
+          </div>
+          <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+          <p class="hero__brand stroke" data-pop>Lumeria</p>
+          <div class="hero__foot">
+            <p data-fade>Adonan diuleni pakai tangan, selai nanas dimasak enam jam di wajan tembaga, dan setiap butir nastar diberi cengkeh satu-satu.</p>
+            <p data-fade>Kue kering rumahan dalam jumlah kecil — habis, ya tunggu oven berikutnya. Kirim ke seluruh Jabodetabek & Bandung.</p>
+          </div>
+          <div class="hero__scroll" aria-hidden="true"><span>Gulir</span><i></i></div>
+        </div>
+      </section>
+
+      <!-- ============ MARQUEE ============ -->
+      <div class="bands" aria-hidden="true">
+        <div class="band band--a"><div class="band__track" data-marquee="1"></div></div>
+        <div class="band band--b"><div class="band__track" data-marquee="-1"></div></div>
+      </div>
+
+      <!-- ============ ABOUT ============ -->
+      <section class="about" id="cerita">
+        <p class="about__tag stroke">Dari dapur Bu Rini</p>
+        <h2 class="about__title stroke" data-pop>Renyah, lumer, bikin nagih</h2>
+        <p class="about__lead" data-words>
+          Lumeria lahir dari satu toples nastar yang selalu habis duluan setiap Lebaran. Sekarang resep yang sama kami panggang untuk meja tamu kamu — mentega Wijsman, keju Edam asli, tanpa pengawet, tanpa jalan pintas.
+        </p>
+        <a href="#menu" class="blob-btn" data-magnetic>
+          <svg viewBox="-10 -10 602 475" preserveAspectRatio="none" aria-hidden="true"><path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z" /></svg>
+          <span>Lihat isi toples</span>
+        </a>
+        <div class="about__media">
+          <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 200 200">
+              <defs><path id="circ" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" /></defs>
+              <circle cx="100" cy="100" r="96" fill="#E2601F" stroke="#3A1A0E" stroke-width="6" />
+              <text><textPath href="#circ">100% MENTEGA ASLI • TANPA PENGAWET • </textPath></text>
+              <circle cx="100" cy="104" r="34" fill="#E9A03B" stroke="#3A1A0E" stroke-width="6" />
+              <path d="M96 58h8v20h-8z" fill="#3A1A0E" />
+              <path d="M88 60l12 8 12-8" stroke="#3A1A0E" stroke-width="5" fill="none" stroke-linecap="round" />
+            </svg>
+          </div>
+          <figure class="photo"><img src="/img/about-hands.jpg" alt="Tangan Bu Rini membulatkan adonan nastar berisi selai nanas" loading="lazy" /></figure>
+          <figure class="photo"><img src="/img/about-oven.jpg" alt="Loyang kastengel keju yang baru keluar dari oven" loading="lazy" /></figure>
+          <figure class="photo"><img src="/img/about-toples.jpg" alt="Toples nastar, putri salju, dan sagu keju di meja tamu saat Lebaran" loading="lazy" /></figure>
+        </div>
+      </section>
+
+      <!-- ============ MENU (horizontal) ============ -->
+      <section class="menu-sec" id="menu" data-nav-dark>
+        <svg class="jelly" viewBox="0 0 1536 200" preserveAspectRatio="none" aria-hidden="true"><path id="jellyPath" fill="#F6E6CC" d="M1536,0 H0 V110 C384,110 1152,110 1536,110 V0 Z" /></svg>
+        <div class="menu-sec__pin">
+          <div class="menu-sec__head">
+            <p class="kicker">Toples 500 gr · PO H-3 · Klik kartu untuk bedah 3D</p>
+            <h2 class="menu-sec__title stroke stroke--cream" data-pop>Isi toplesmu</h2>
+          </div>
+          <div class="menu-sec__track" id="menuTrack"></div>
+          <div class="menu-sec__progress" aria-hidden="true"><span id="menuProgress"></span></div>
+        </div>
+      </section>
+
+      <!-- ============ PROCESS ============ -->
+      <section class="dapur" id="dapur">
+        <div class="dapur__intro">
+          <p class="kicker kicker--dark">Empat langkah, nol jalan pintas</p>
+          <h2 class="dapur__title stroke" data-pop>Dari dapur, bukan pabrik</h2>
+        </div>
+        <ol class="steps">
+          <li class="step" style="--c: #E9A03B">
+            <span class="step__num">01</span>
+            <div><h3>Timbang yang jujur</h3><p>Mentega Wijsman, kuning telur ayam kampung, tepung yang diayak dua kali. Tidak ada margarin yang menyamar.</p></div>
+            <svg class="step__ill" viewBox="0 0 120 120" aria-hidden="true"><rect x="20" y="70" width="80" height="30" rx="8" /><path d="M30 70c0-22 60-22 60 0" /><circle cx="60" cy="44" r="10" /></svg>
+          </li>
+          <li class="step" style="--c: #E2601F">
+            <span class="step__num">02</span>
+            <div><h3>Selai nanas 6 jam</h3><p>Nanas Subang diparut, dimasak pelan dengan kayu manis dan cengkeh sampai pekat, legit, dan tidak lembek di gigitan.</p></div>
+            <svg class="step__ill" viewBox="0 0 120 120" aria-hidden="true"><path d="M20 60h80l-8 36H28z" /><path d="M10 60h100" /><path d="M48 44c0-10 8-10 8-20M64 44c0-10 8-10 8-20" /></svg>
+          </li>
+          <li class="step" style="--c: #8DA34A">
+            <span class="step__num">03</span>
+            <div><h3>Dibulatkan tangan</h3><p>Setiap nastar ditimbang 9 gram, dibulatkan, lalu diberi cengkeh. Kastengel dipotong satu-satu, bukan dicetak mesin.</p></div>
+            <svg class="step__ill" viewBox="0 0 120 120" aria-hidden="true"><circle cx="40" cy="70" r="16" /><circle cx="80" cy="70" r="16" /><path d="M40 54v-8M80 54v-8" /></svg>
+          </li>
+          <li class="step" style="--c: #C8372D">
+            <span class="step__num">04</span>
+            <div><h3>Oven pagi, kirim sore</h3><p>Dipanggang di hari pengiriman, didinginkan, lalu langsung masuk toples kedap udara. Renyahnya awet sampai 3 bulan.</p></div>
+            <svg class="step__ill" viewBox="0 0 120 120" aria-hidden="true"><rect x="16" y="24" width="88" height="76" rx="10" /><rect x="28" y="44" width="64" height="44" rx="6" /><path d="M30 34h8M46 34h8" /></svg>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============ JAR 3D ============ -->
+      <section class="jar" id="toples">
+        <div class="jar__pin">
+          <div class="jar__copy">
+            <p class="kicker kicker--dark">Satu toples 500 gram</p>
+            <h2 class="jar__title stroke" data-pop>Penuh sampai tutupnya susah ditutup</h2>
+            <p class="jar__count"><span id="jarCount">0</span><small>butir nastar</small></p>
+            <p class="jar__note">Kami tidak pakai kertas pengganjal di dasar toples. Isinya kue, semuanya.</p>
+          </div>
+          <canvas class="jar__canvas" id="jarCanvas" aria-hidden="true"></canvas>
+        </div>
+      </section>
+
+      <!-- ============ STATS ============ -->
+      <section class="stats" aria-label="Angka Lumeria">
+        <div class="stat"><b data-count="38">0</b><span>tahun resep yang sama</span></div>
+        <div class="stat"><b data-count="12400" data-suffix="+">0</b><span>toples terkirim sejak 2019</span></div>
+        <div class="stat"><b data-count="4.9" data-decimals="1">0</b><span>rating dari 2.100 ulasan</span></div>
+        <div class="stat"><b data-count="0">0</b><span>pengawet & pewarna</span></div>
+      </section>
+
+      <!-- ============ HAMPERS ============ -->
+      <section class="hampers" id="hampers" data-nav-dark>
+        <div class="hampers__media"><img src="/img/hampers.jpg" alt="Hampers Lumeria berisi empat toples kue di nampan rotan dengan pita merah" loading="lazy" /></div>
+        <div class="hampers__copy">
+          <p class="kicker">Untuk mertua, atasan, dan grup arisan</p>
+          <h2 class="hampers__title stroke stroke--cream" data-pop>Hampers yang dibuka pelan-pelan</h2>
+          <ul class="packs">
+            <li><div><h3>Silaturahmi</h3><p>3 toples pilihan · box kraft · kartu ucapan</p></div><b>Rp365rb</b></li>
+            <li><div><h3>Keluarga</h3><p>4 toples · nampan rotan · pita beludru</p></div><b>Rp520rb</b></li>
+            <li><div><h3>Juragan</h3><p>6 toples · peti kayu · kartu ucapan custom</p></div><b>Rp790rb</b></li>
+          </ul>
+
+          <!-- Interactive Hamper Box Picker -->
+          <div class="hamper-picker">
+            <p class="hamper-picker__label">Pilih Paket Siap Bungkus:</p>
+            <div class="hamper-picker__buttons">
+              <button type="button" class="pill pill--cream hamper-btn" data-pack="Silaturahmi" data-qty="3">
+                Paket 3 Toples
+              </button>
+              <button type="button" class="pill pill--cream hamper-btn is-active" data-pack="Keluarga" data-qty="4">
+                Paket 4 Toples (Favorit)
+              </button>
+              <button type="button" class="pill pill--cream hamper-btn" data-pack="Juragan" data-qty="6">
+                Paket 6 Toples
+              </button>
+            </div>
+            <a href="#pesan" class="blob-btn blob-btn--cream hamper-order-link" id="hamperOrderBtn" data-magnetic>
+              <svg viewBox="-10 -10 602 475" preserveAspectRatio="none" aria-hidden="true"><path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z" /></svg>
+              <span>Pesan Hampers Ini</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TESTIMONI ============ -->
+      <section class="testi" aria-label="Kata pelanggan">
+        <h2 class="testi__title stroke" data-pop>Kata yang sudah ngabisin</h2>
+        <div class="testi__row" data-drift="-1">
+          <blockquote style="--r:-3deg;--bg:#E9A03B"><p>“Nastarnya lumer, selainya nggak kemanisan. Toples pertama habis sebelum malam takbiran.”</p><cite>Dewi, Bekasi</cite></blockquote>
+          <blockquote style="--r:2deg;--bg:#FFF6E6"><p>“Kastengelnya kejunya kerasa banget. Mertua minta nomor WA-nya. Itu pujian tertinggi.”</p><cite>Raka, Tangerang</cite></blockquote>
+          <blockquote style="--r:-1deg;--bg:#8DA34A"><p>“Putri saljunya bikin baju item saya putih semua. Worth it.”</p><cite>Sinta, Jakarta Selatan</cite></blockquote>
+          <blockquote style="--r:3deg;--bg:#E2601F"><p>“Pesan 40 hampers untuk kantor, semua sampai rapi, nggak ada yang remuk.”</p><cite>Bu Lina, HR Manager</cite></blockquote>
+          <blockquote style="--r:-2deg;--bg:#FFF6E6"><p>“Sagu kejunya beneran meleleh di lidah. Anak saya ngumpetin toplesnya di kamar.”</p><cite>Fajar, Depok</cite></blockquote>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ACCORDION ============ -->
+      <section class="faq" id="faq">
+        <div class="faq__intro">
+          <p class="kicker kicker--dark">Pertanyaan yang sering ditanyakan</p>
+          <h2 class="faq__title stroke" data-pop>Tanya Jawab Seputar Toples</h2>
+        </div>
+        <div class="faq__list" id="faqList"></div>
+      </section>
+
+      <!-- ============ ORDER ============ -->
+      <section class="order" id="pesan" data-nav-dark>
+        <div class="order__head">
+          <h2 class="order__title stroke stroke--cream" data-pop>Pesan sekarang</h2>
+          <p>Isi pesananmu, kami rangkum jadi pesan WhatsApp. Pembayaran & ongkir dikonfirmasi admin dalam 1 jam (08.00–20.00).</p>
+        </div>
+        <form class="order__form" id="orderForm" novalidate>
+          <div class="order__items" id="orderItems"></div>
+          <div class="order__side">
+            <label>Nama<input name="nama" required autocomplete="name" placeholder="Nama penerima" /></label>
+            <label>Kota / Kecamatan<input name="kota" required placeholder="mis. Cinere, Depok" /></label>
+            <label>Tanggal kirim<input name="tanggal" type="date" required /></label>
+            <label>Catatan<textarea name="catatan" rows="2" placeholder="Kartu ucapan, alergi, request pita, dll."></textarea></label>
+            <div class="order__total"><span>Total</span><b id="orderTotal">Rp0</b></div>
+            <button type="submit" class="blob-btn blob-btn--cream" data-magnetic>
+              <svg viewBox="-10 -10 602 475" preserveAspectRatio="none" aria-hidden="true"><path d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z" /></svg>
+              <span>Kirim via WhatsApp</span>
+            </button>
+            <p class="order__msg" id="orderMsg" role="status"></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- ============ FLOATING CART BAR ============ -->
+    <aside class="floating-cart" id="floatingCart" aria-label="Ringkasan keranjang belanja">
+      <div class="floating-cart__content">
+        <div class="floating-cart__badge">
+          <span class="floating-cart__icon">🍪</span>
+          <span class="floating-cart__count" id="floatCount">0 toples</span>
+        </div>
+        <div class="floating-cart__info">
+          <span class="floating-cart__label">Total pesanan:</span>
+          <b class="floating-cart__total" id="floatTotal">Rp0</b>
+        </div>
+        <a href="#pesan" class="pill pill--solid floating-cart__btn" data-magnetic>
+          <span class="roll"><span>Lanjut Pesan</span><span aria-hidden="true">Lanjut Pesan</span></span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="footer__cols">
+        <div><h4>Dapur</h4><p>Jl. Kenanga No. 12, Cinere<br />Depok, Jawa Barat</p></div>
+        <div><h4>Jam pesan</h4><p>Senin–Sabtu, 08.00–20.00<br />Minggu khusus ambil di tempat</p></div>
+        <div><h4>Sapa kami</h4><p><a href="https://wa.me/6281200000000" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a> · <a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a></p></div>
+      </div>
+      <p class="footer__big" aria-hidden="true">Lumeria</p>
+      <p class="footer__legal">© 2026 Lumeria Kue Rumahan · PIRT 2063276010123-29 · Halal dalam proses sertifikasi</p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
