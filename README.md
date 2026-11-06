@@ -6,9 +6,14 @@
 [![Three.js](https://img.shields.io/badge/Three.js-0.170-black?logo=three.js&logoColor=white)](https://threejs.org/)
 [![GSAP](https://img.shields.io/badge/GSAP-3.13-88CE02?logo=greensock&logoColor=white)](https://greensock.com/)
 [![Lenis](https://img.shields.io/badge/Lenis-Smooth_Scroll-FF5C00)](https://lenis.darkroom.engineering/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-lumeria--mu.vercel.app-F59E0B?logo=vercel&logoColor=white)](https://lumeria-mu.vercel.app/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
 **Lumeria** adalah platform web landing page interaktif untuk jenama kue kering artisan rumahan (*Nastar Klasik, Kastengel Edam, Sagu Keju, Putri Salju, Kue Kacang, dan Kuping Gajah*). Menggabungkan **3D procedural modeling** berbasis Three.js WebGL (tanpa dependensi file aset eksternal yang berat), animasi scroll sinematik GSAP ScrollTrigger & Lenis, synthesizer audio prosedural Web Audio API, serta kalkulator pemesanan langsung WhatsApp.
+
+🔗 **Production Live Showcase:** [https://lumeria-mu.vercel.app](https://lumeria-mu.vercel.app)
+
+> 💡 **Pure Client-Side 3D Architecture:** Lumeria dirancang secara mandiri sebagai *high-fidelity client-side 3D experience* dengan procedural WebGL shaders dan Web Audio API tanpa memerlukan server backend database, sehingga seluruh efek fisika toples, audio renyah, dan rendering kue berjalan 100% mulus di memori browser pengguna.
 
 ---
 
